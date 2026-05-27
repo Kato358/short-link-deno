@@ -741,7 +741,7 @@ export function publicPage(data: PublicPageData): string {
   const headerRight = isLoggedIn
     ? `<span class="badge badge-active" style="font-size:0.8125rem;">${escapeHtml(t("logged_in", lang))}</span>
         <a href="/dashboard" class="btn btn-ghost btn-sm">${escapeHtml(t("go_dashboard", lang))}</a>
-        <a href="/" onclick="document.cookie='api_key=;path=/;max-age=0';return true;" class="btn btn-ghost btn-sm">${escapeHtml(t("logout", lang))}</a>`
+        <a href="/logout" class="btn btn-ghost btn-sm">${escapeHtml(t("logout", lang))}</a>`
     : `<a href="/dashboard" class="btn btn-ghost btn-sm">${escapeHtml(t("management_entry", lang))}</a>`;
 
   const permanentOption = isLoggedIn
@@ -1000,7 +1000,7 @@ export function dashboardPage(data: DashboardData): string {
       <div class="header-right">
         <button class="btn-icon" onclick="toggleTheme()" title="${escapeHtml(t("dark_mode", lang))}"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
         <a href="/lang/${lang === "zh" ? "en" : "zh"}" class="btn-icon" title="${escapeHtml(t("lang_switch", lang))}" style="text-decoration:none;">${ICONS.globe}</a>
-        <a href="/dashboard" onclick="document.cookie='api_key=;path=/;max-age=0';return true;" class="btn btn-ghost btn-sm">${escapeHtml(t("sign_out", lang))}</a>
+        <a href="/logout" class="btn btn-ghost btn-sm">${escapeHtml(t("sign_out", lang))}</a>
       </div>
     </div>
 
@@ -1168,7 +1168,7 @@ export function detailPage(data: DetailData): string {
       <div class="header-right">
         <button class="btn-icon" onclick="toggleTheme()" title="${escapeHtml(t("dark_mode", lang))}"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
         <a href="/lang/${lang === "zh" ? "en" : "zh"}" class="btn-icon" title="${escapeHtml(t("lang_switch", lang))}" style="text-decoration:none;">${ICONS.globe}</a>
-        <a href="/dashboard" onclick="document.cookie='api_key=;path=/;max-age=0';return true;" class="btn btn-ghost btn-sm">${escapeHtml(t("sign_out", lang))}</a>
+        <a href="/logout" class="btn btn-ghost btn-sm">${escapeHtml(t("sign_out", lang))}</a>
       </div>
     </div>
 

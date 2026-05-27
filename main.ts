@@ -275,6 +275,12 @@ app.get("/dashboard/:code", cookieAuthMiddleware, async (c) => {
 
 // --------------- Login / Auth Actions --------------------------------
 
+app.get("/logout", (c) => {
+  const isSecure = new URL(c.req.url).protocol === "https:";
+  c.header("Set-Cookie", `api_key=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0${isSecure ? "; Secure" : ""}`);
+  return c.redirect("/");
+});
+
 app.post("/login", async (c) => {
   const formData = await c.req.formData();
   const apiKey = formData.get("apiKey")?.toString() || "";
