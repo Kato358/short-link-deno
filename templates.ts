@@ -141,6 +141,25 @@ button, input, select { font-family: var(--font); }
   color: var(--text);
 }
 
+.header-left a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+  transition: text-shadow var(--transition), transform var(--transition), opacity var(--transition);
+  cursor: pointer;
+}
+
+.header-left a:hover {
+  text-shadow: 0 0 12px rgba(99, 102, 241, 0.45);
+}
+
+.header-left a:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+}
+
 .header-right {
   display: flex;
   align-items: center;
@@ -994,8 +1013,10 @@ export function dashboardPage(data: DashboardData): string {
   return layout(`
     <div class="header">
       <div class="header-left">
-        <span class="header-logo">${ICONS.link}</span>
-        <span class="header-title">${escapeHtml(t("site_title", lang))}</span>
+        <a href="/">
+          <span class="header-logo">${ICONS.link}</span>
+          <span class="header-title">${escapeHtml(t("site_title", lang))}</span>
+        </a>
       </div>
       <div class="header-right">
         <button class="btn-icon" onclick="toggleTheme()" title="${escapeHtml(t("dark_mode", lang))}"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
@@ -1162,8 +1183,10 @@ export function detailPage(data: DetailData): string {
   return layout(`
     <div class="header">
       <div class="header-left">
-        <span class="header-logo">${ICONS.link}</span>
-        <span class="header-title">${escapeHtml(t("site_title", lang))}</span>
+        <a href="/">
+          <span class="header-logo">${ICONS.link}</span>
+          <span class="header-title">${escapeHtml(t("site_title", lang))}</span>
+        </a>
       </div>
       <div class="header-right">
         <button class="btn-icon" onclick="toggleTheme()" title="${escapeHtml(t("dark_mode", lang))}"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
