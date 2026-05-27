@@ -1,0 +1,4 @@
+.claude/
+.trellis/
+deno.lock
+AGENTS.md
