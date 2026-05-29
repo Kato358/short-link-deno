@@ -144,6 +144,9 @@ const translations: Translations = {
   no_data: { zh: "暂无数据", en: "No data" },
   // Footer
   powered_by: { zh: "托管于", en: "Powered by" },
+  // QR code
+  qr_code: { zh: "二维码", en: "QR Code" },
+  download_qr: { zh: "下载二维码", en: "Download QR" },
 };
 
 export function t(key: string, lang: Locale = "zh"): string {

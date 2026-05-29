@@ -39,7 +39,7 @@ import {
   notFoundPage,
   publicPage,
 } from "./templates.ts";
-import { generateQR } from "./qrcode.ts";
+import { generateQRPng } from "./qrcode.ts";
 import { getLang, t } from "./i18n.ts";
 
 const app = new Hono();
@@ -399,7 +399,6 @@ app.get("/dashboard/:code", cookieAuthMiddleware, async (c) => {
 
   const baseUrl = new URL(c.req.url).origin;
   const clicks = await getClickCount(code);
-  const qrSvg = generateQR(`${baseUrl}/${code}`);
 
   return c.html(
     detailPage({
@@ -415,7 +414,6 @@ app.get("/dashboard/:code", cookieAuthMiddleware, async (c) => {
       lang,
       error: c.req.query("error") || undefined,
       success: c.req.query("success") || undefined,
-      qrSvg,
     }),
   );
 });
@@ -593,6 +591,24 @@ app.post("/dashboard/batch-delete", cookieAuthMiddleware, async (c) => {
   return c.redirect(
     "/dashboard?success=" + encodeURIComponent(t("link_deleted", lang)),
   );
+});
+
+// --------------- QR Code Image (No Auth) ------------------------------
+
+app.get("/qr/:code", async (c) => {
+  const code = c.req.param("code")!;
+  if (!/^[a-zA-Z0-9_-]{3,32}$/.test(code)) {
+    return c.text("Invalid code", 400);
+  }
+  const baseUrl = new URL(c.req.url).origin;
+  const png = await generateQRPng(`${baseUrl}/${code}`);
+  if (png.length === 0) return c.text("Failed to generate QR", 500);
+  return new Response(png as unknown as BodyInit, {
+    headers: {
+      "Content-Type": "image/png",
+      "Cache-Control": "public, max-age=31536000, immutable",
+    },
+  });
 });
 
 // --------------- Redirect Route (No Auth) ----------------------------

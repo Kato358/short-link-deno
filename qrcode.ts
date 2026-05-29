@@ -387,6 +387,110 @@ function matrixToSvg(
   }</g></svg>`;
 }
 
+// --------------- PNG Encoding ---------------
+
+const CRC_TABLE = new Uint32Array(256);
+for (let n = 0; n < 256; n++) {
+  let c = n;
+  for (let k = 0; k < 8; k++) {
+    c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+  }
+  CRC_TABLE[n] = c;
+}
+
+function crc32(data: Uint8Array, start = 0, end?: number): number {
+  let crc = 0xffffffff;
+  const len = end ?? data.length;
+  for (let i = start; i < len; i++) {
+    crc = CRC_TABLE[(crc ^ data[i]) & 0xff] ^ (crc >>> 8);
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+function pngChunk(type: string, data: Uint8Array): Uint8Array {
+  const typeBytes = new TextEncoder().encode(type);
+  const chunk = new Uint8Array(12 + data.length);
+  const view = new DataView(chunk.buffer);
+
+  view.setUint32(0, data.length);
+  chunk.set(typeBytes, 4);
+  chunk.set(data, 8);
+
+  const crcInput = new Uint8Array(4 + data.length);
+  crcInput.set(typeBytes, 0);
+  crcInput.set(data, 4);
+  view.setUint32(8 + data.length, crc32(crcInput));
+
+  return chunk;
+}
+
+async function matrixToPng(
+  matrix: number[][],
+  moduleSize: number,
+  quietZone: number,
+): Promise<Uint8Array> {
+  const qrSize = matrix.length;
+  const imgSize = qrSize * moduleSize + quietZone * 2;
+  const white = [255, 255, 255, 255];
+  const black = [0, 0, 0, 255];
+
+  const rawData = new Uint8Array(imgSize * (1 + imgSize * 4));
+  let offset = 0;
+
+  for (let y = 0; y < imgSize; y++) {
+    rawData[offset++] = 0;
+    const qrY = Math.floor((y - quietZone) / moduleSize);
+    for (let x = 0; x < imgSize; x++) {
+      const qrX = Math.floor((x - quietZone) / moduleSize);
+      const color = (qrY >= 0 && qrY < qrSize && qrX >= 0 && qrX < qrSize &&
+          matrix[qrY][qrX] === 1)
+        ? black
+        : white;
+      rawData[offset++] = color[0];
+      rawData[offset++] = color[1];
+      rawData[offset++] = color[2];
+      rawData[offset++] = color[3];
+    }
+  }
+
+  const compressed = await new Response(
+    new Blob([rawData]).stream().pipeThrough(new CompressionStream("deflate")),
+  ).arrayBuffer();
+  const idatData = new Uint8Array(compressed);
+
+  const pngSig = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]);
+
+  const ihdr = new Uint8Array(13);
+  const ihdrView = new DataView(ihdr.buffer);
+  ihdrView.setUint32(0, imgSize);
+  ihdrView.setUint32(4, imgSize);
+  ihdr[8] = 8;
+  ihdr[9] = 6;
+  ihdr[10] = 0;
+  ihdr[11] = 0;
+  ihdr[12] = 0;
+
+  const ihdrChunk = pngChunk("IHDR", ihdr);
+  const idatChunk = pngChunk("IDAT", idatData);
+  const iendChunk = pngChunk("IEND", new Uint8Array(0));
+
+  const result = new Uint8Array(
+    pngSig.length + ihdrChunk.length + idatChunk.length + iendChunk.length,
+  );
+  let pos = 0;
+  result.set(pngSig, pos);
+  pos += pngSig.length;
+  result.set(ihdrChunk, pos);
+  pos += ihdrChunk.length;
+  result.set(idatChunk, pos);
+  pos += idatChunk.length;
+  result.set(iendChunk, pos);
+
+  return result;
+}
+
+// --------------- Public API ---------------
+
 export function generateQR(text: string): string {
   const bytes = new TextEncoder().encode(text);
   const version = chooseVersion(bytes.length);
@@ -415,4 +519,32 @@ export function generateQR(text: string): string {
   writeFormatInfo(finalMatrix, bestMask);
 
   return matrixToSvg(finalMatrix, 4, 16);
+}
+
+export async function generateQRPng(text: string): Promise<Uint8Array> {
+  const bytes = new TextEncoder().encode(text);
+  const version = chooseVersion(bytes.length);
+  if (version < 0) return new Uint8Array(0);
+
+  const dataCW = encodeData(text, version);
+  const interleaved = interleaveBlocks(dataCW, version);
+  const { matrix, reserved } = createMatrix(version);
+  placeData(matrix, reserved, interleaved);
+
+  let bestMask = 0;
+  let bestScore = Infinity;
+  for (let mask = 0; mask < 8; mask++) {
+    const masked = applyMask(matrix, reserved, mask);
+    writeFormatInfo(masked, mask);
+    const score = penaltyScore(masked);
+    if (score < bestScore) {
+      bestScore = score;
+      bestMask = mask;
+    }
+  }
+
+  const finalMatrix = applyMask(matrix, reserved, bestMask);
+  writeFormatInfo(finalMatrix, bestMask);
+
+  return await matrixToPng(finalMatrix, 8, 32);
 }

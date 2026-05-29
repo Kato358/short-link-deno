@@ -541,7 +541,7 @@ tbody tr:last-child td { border-bottom: none; }
   margin-top: 16px;
 }
 
-.qr-section svg {
+.qr-section img {
   border-radius: 4px;
 }
 
@@ -1036,7 +1036,7 @@ export function publicPage(data: PublicPageData): string {
       </div>
     </div>
 
-    <div class="container" style="max-width:640px;padding-top:120px;">
+    <div class="container" style="max-width:640px;">
       <div style="text-align:center;margin-bottom:40px;">
         <div style="display:flex;justify-content:center;margin-bottom:16px;color:var(--primary);">${ICONS.link}</div>
         <h1 style="font-size:1.75rem;font-weight:800;margin-bottom:8px;">${
@@ -1111,6 +1111,14 @@ export function publicPage(data: PublicPageData): string {
     }</div>
               <div style="font-size:0.875rem;" id="resultExpiry"></div>
             </div>
+            <div id="qrContainer" style="display:none;text-align:center;padding:16px;background:var(--bg);border-radius:var(--radius-sm);">
+              <img id="qrImage" style="max-width:200px;width:100%;height:auto;border-radius:4px;" />
+              <div style="margin-top:8px;">
+                <a id="qrDownload" download="qr.png" style="font-size:0.75rem;color:var(--primary);">${
+      escapeHtml(t("download_qr", lang))
+    }</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1172,6 +1180,10 @@ export function publicPage(data: PublicPageData): string {
             expiryEl.textContent = '${escapeHtml(t("never", lang))}';
           }
           resultArea.style.display = 'block';
+          var qrUrl = '/qr/' + res.data.code;
+          document.getElementById('qrImage').src = qrUrl;
+          document.getElementById('qrDownload').href = qrUrl;
+          document.getElementById('qrContainer').style.display = 'block';
         } else {
           document.getElementById('errorMessage').textContent = res.data.error || 'Error';
           errorArea.style.display = 'block';
@@ -1708,11 +1720,10 @@ export interface DetailData {
   error?: string;
   success?: string;
   lang: Locale;
-  qrSvg?: string;
 }
 
 export function detailPage(data: DetailData): string {
-  const { link, baseUrl, error, success, lang, qrSvg } = data;
+  const { link, baseUrl, error, success, lang } = data;
   const shortUrl = `${baseUrl}/${link.code}`;
   const isExpired = link.expiresAt !== null && link.expiresAt <= Date.now();
 
@@ -1724,12 +1735,10 @@ export function detailPage(data: DetailData): string {
       escapeHtml(t("active", lang))
     }</span>`;
 
-  const qrHtml = qrSvg
-    ? `<div class="qr-section">
-        ${qrSvg}
+  const qrHtml = `<div class="qr-section">
+        <img src="/qr/${link.code}" style="width:200px;height:200px;" />
         <span class="qr-label">${escapeHtml(shortUrl)}</span>
-       </div>`
-    : "";
+       </div>`;
 
   return layout(
     `
