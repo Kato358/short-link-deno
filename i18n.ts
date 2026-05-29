@@ -35,7 +35,10 @@ const translations: Translations = {
   created: { zh: "创建时间", en: "Created" },
   copy: { zh: "复制", en: "Copy" },
   copied: { zh: "已复制", en: "Copied" },
-  page_info: { zh: "第 {page} 页，共 {total} 页", en: "Page {page} of {total}" },
+  page_info: {
+    zh: "第 {page} 页，共 {total} 页",
+    en: "Page {page} of {total}",
+  },
   previous: { zh: "上一页", en: "Previous" },
   next: { zh: "下一页", en: "Next" },
   link_details: { zh: "链接详情", en: "Link Details" },
@@ -65,7 +68,8 @@ const translations: Translations = {
   invalid_url: { zh: "网址格式无效", en: "Invalid URL format" },
   invalid_code: {
     zh: "短码格式无效，请使用 3-32 个字母、数字、横线或下划线",
-    en: "Invalid code format. Use 3-32 alphanumeric, dash or underscore characters.",
+    en:
+      "Invalid code format. Use 3-32 alphanumeric, dash or underscore characters.",
   },
   code_reserved: { zh: "该短码已保留", en: "Code is reserved" },
   code_exists: { zh: "该短码已存在", en: "Code already exists" },
@@ -77,13 +81,19 @@ const translations: Translations = {
   dark_mode: { zh: "深色模式", en: "Dark mode" },
   // Public page
   public_title: { zh: "短链接生成", en: "Short Link Generator" },
-  public_subtitle: { zh: "输入长链接，快速生成短链接", en: "Enter a long URL to generate a short link" },
+  public_subtitle: {
+    zh: "输入长链接，快速生成短链接",
+    en: "Enter a long URL to generate a short link",
+  },
   url_placeholder: { zh: "请输入需要缩短的链接", en: "Enter a URL to shorten" },
   expiry_label: { zh: "有效期", en: "Expiry" },
   create_button: { zh: "生成短链接", en: "Create Short Link" },
   result_title: { zh: "短链接已生成", en: "Short Link Created" },
   management_entry: { zh: "管理入口", en: "Admin" },
-  rate_limit_error: { zh: "请求过于频繁，请稍后再试", en: "Rate limit exceeded. Please try again later." },
+  rate_limit_error: {
+    zh: "请求过于频繁，请稍后再试",
+    en: "Rate limit exceeded. Please try again later.",
+  },
   // Expiry options
   expiry_1d: { zh: "1 天", en: "1 day" },
   expiry_7d: { zh: "7 天", en: "7 days" },
@@ -100,15 +110,40 @@ const translations: Translations = {
   // Batch delete
   select: { zh: "选择", en: "Select" },
   batch_delete: { zh: "批量删除", en: "Batch Delete" },
-  batch_delete_confirm: { zh: "确定要删除选中的链接吗？此操作不可恢复。", en: "Delete selected links? This cannot be undone." },
+  batch_delete_confirm: {
+    zh: "确定要删除选中的链接吗？此操作不可恢复。",
+    en: "Delete selected links? This cannot be undone.",
+  },
   links_selected: { zh: "已选择 {count} 个链接", en: "{count} links selected" },
-  no_selection: { zh: "请先选择要删除的链接", en: "Please select links to delete first" },
-  public_cannot_permanent: { zh: "公共链接不支持永久有效期", en: "Public links cannot be permanent" },
+  no_selection: {
+    zh: "请先选择要删除的链接",
+    en: "Please select links to delete first",
+  },
+  public_cannot_permanent: {
+    zh: "公共链接不支持永久有效期",
+    en: "Public links cannot be permanent",
+  },
   logged_in: { zh: "已登录", en: "Logged In" },
   go_dashboard: { zh: "进入后台", en: "Dashboard" },
   logout: { zh: "退出登录", en: "Logout" },
-  custom_code_placeholder: { zh: "自定义短码（可选）", en: "Custom code (optional)" },
+  custom_code_placeholder: {
+    zh: "自定义短码（可选）",
+    en: "Custom code (optional)",
+  },
   permanent: { zh: "永久", en: "Permanent" },
+  // Edit link
+  edit_link: { zh: "编辑链接", en: "Edit Link" },
+  save: { zh: "保存", en: "Save" },
+  link_updated: { zh: "链接已更新", en: "Link updated" },
+  update_ttl: { zh: "更新有效期", en: "Update TTL" },
+  // Analytics
+  click_trend: { zh: "点击趋势", en: "Click Trend" },
+  top_links: { zh: "热门链接", en: "Top Links" },
+  last_7_days: { zh: "近 7 天", en: "Last 7 days" },
+  last_30_days: { zh: "近 30 天", en: "Last 30 days" },
+  no_data: { zh: "暂无数据", en: "No data" },
+  // Footer
+  powered_by: { zh: "托管于", en: "Powered by" },
 };
 
 export function t(key: string, lang: Locale = "zh"): string {

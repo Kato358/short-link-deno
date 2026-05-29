@@ -1,4 +1,5 @@
-const BASE62_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+const BASE62_CHARS =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 const RESERVED_CODES = new Set([
   "api",
@@ -61,7 +62,9 @@ export function parseTtl(input: string): number | null {
  * Validate that a TTL is allowed for public links (max 30 days, no permanent).
  * Returns the parsed ms value, or null if invalid/not allowed.
  */
-export function parsePublicTtl(input: string): { ms: number | null; error: string | null } {
+export function parsePublicTtl(
+  input: string,
+): { ms: number | null; error: string | null } {
   const s = input.trim().toLowerCase();
   if (!s || s === "never" || s === "permanent" || s === "0") {
     return { ms: null, error: "Public links cannot be permanent" };
@@ -82,11 +85,39 @@ export function parsePublicTtl(input: string): { ms: number | null; error: strin
   }
 }
 
+const BOT_PATTERNS = [
+  "googlebot",
+  "bingbot",
+  "baiduspider",
+  "yandexbot",
+  "duckduckbot",
+  "facebookexternalhit",
+  "twitterbot",
+  "linkedinbot",
+  "slackbot",
+  "whatsapp",
+  "telegrambot",
+  "bot",
+  "crawler",
+  "spider",
+  "scraper",
+  "curl",
+  "wget",
+  "python-requests",
+  "go-http-client",
+];
+
+export function isBot(userAgent: string): boolean {
+  if (!userAgent) return false;
+  const ua = userAgent.toLowerCase();
+  return BOT_PATTERNS.some((p) => ua.includes(p));
+}
+
 /**
  * Extract client IP from request headers (for Deno Deploy / reverse proxy).
  */
 export function getClientIp(headers: Headers): string {
-  return headers.get("x-forwarded-for")?.split(",")[0]?.trim()
-    || headers.get("x-real-ip")
-    || "127.0.0.1";
+  return headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    headers.get("x-real-ip") ||
+    "127.0.0.1";
 }

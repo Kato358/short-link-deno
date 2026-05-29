@@ -43,7 +43,10 @@ export function extractApiKey(c: Context): string | null {
   return null;
 }
 
-export function authMiddleware(c: Context, next: Next): Response | Promise<Response | void> {
+export function authMiddleware(
+  c: Context,
+  next: Next,
+): Response | Promise<Response | void> {
   const expectedKey = getApiKey();
   const providedKey = extractApiKey(c);
 

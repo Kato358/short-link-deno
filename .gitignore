@@ -2,3 +2,4 @@
 .trellis/
 deno.lock
 AGENTS.md
+CONTEXT.md

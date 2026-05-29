@@ -1,16 +1,28 @@
-import { t, type Locale } from "./i18n.ts";
+import { type Locale, t } from "./i18n.ts";
 
 const ICONS = {
-  link: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
-  sun: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
-  moon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
-  globe: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
-  search: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
-  plus: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
-  externalLink: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
-  trash: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`,
-  arrowLeft: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>`,
-  copy: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`,
+  link:
+    `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+  sun:
+    `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+  moon:
+    `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`,
+  globe:
+    `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  search:
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+  plus:
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>`,
+  externalLink:
+    `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>`,
+  trash:
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`,
+  arrowLeft:
+    `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>`,
+  copy:
+    `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`,
+  edit:
+    `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
 };
 
 const CSS = `
@@ -293,6 +305,24 @@ input::placeholder {
   color: var(--text-tertiary);
 }
 
+select {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--surface);
+  outline: none;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.3);
+}
+
 /* Table */
 .table-wrapper { overflow-x: auto; }
 
@@ -499,6 +529,185 @@ tbody tr:last-child td { border-bottom: none; }
   outline: none;
 }
 
+/* QR code */
+.qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  margin-top: 16px;
+}
+
+.qr-section svg {
+  border-radius: 4px;
+}
+
+.qr-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Edit form on detail page */
+.edit-form {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.edit-form h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.edit-form .form-field {
+  margin-bottom: 12px;
+}
+
+.edit-form .form-field label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+/* Analytics panel */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .analytics-grid { grid-template-columns: 1fr; }
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+
+.chart-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.chart-tab {
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.chart-tab:hover { background: var(--surface-hover); }
+.chart-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.chart-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--text);
+  color: var(--bg);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+}
+
+.chart-tooltip.visible { opacity: 1; }
+
+.top-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.top-link-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+}
+
+.top-link-rank {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.top-link-code {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.top-link-code:hover { text-decoration: underline; }
+
+.top-link-url {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.top-link-clicks {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text);
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 24px 16px 16px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.footer a {
+  color: var(--text-tertiary);
+  transition: color var(--transition);
+}
+
+.footer a:hover { color: var(--primary); }
+
+.footer .sep {
+  margin: 0 8px;
+  color: var(--border);
+}
+
 /* Theme toggle icon visibility */
 .theme-sun { display: none; }
 .theme-moon { display: inline-flex; }
@@ -689,6 +898,13 @@ function layout(content: string, lang: Locale = "zh"): string {
 </head>
 <body>
 ${content}
+<footer class="footer">
+  <a href="https://github.com/Kato358/short-link-deno" target="_blank" rel="noopener">GitHub</a>
+  <span class="sep">&middot;</span>
+  <a href="https://deno.com/deploy" target="_blank" rel="noopener">${
+    escapeHtml(t("powered_by", lang))
+  } Deno Deploy</a>
+</footer>
 <script>
 (function(){
   var html=document.documentElement;
@@ -727,7 +943,8 @@ function escapeHtml(str: string): string {
 // --------------- Login Page ---------------
 
 export function loginPage(error?: string, lang: Locale = "zh"): string {
-  return layout(`
+  return layout(
+    `
     <div class="login-wrapper">
       <div class="login-card">
         <div class="login-logo">${ICONS.link}</div>
@@ -735,15 +952,25 @@ export function loginPage(error?: string, lang: Locale = "zh"): string {
         <p>${escapeHtml(t("login_subtitle", lang))}</p>
         ${error ? `<div class="msg msg-error">${escapeHtml(error)}</div>` : ""}
         <form method="POST" action="/login">
-          <input type="password" name="apiKey" placeholder="${escapeHtml(t("api_key_placeholder", lang))}" required autofocus />
-          <button type="submit" class="btn btn-primary">${escapeHtml(t("sign_in", lang))}</button>
+          <input type="password" name="apiKey" placeholder="${
+      escapeHtml(t("api_key_placeholder", lang))
+    }" required autofocus />
+          <button type="submit" class="btn btn-primary">${
+      escapeHtml(t("sign_in", lang))
+    }</button>
         </form>
         <div style="text-align:center;margin-top:16px;">
-          <a href="/lang/${lang === "zh" ? "en" : "zh"}" class="btn btn-ghost btn-sm" style="border:none;color:var(--text-tertiary);">${ICONS.globe} ${escapeHtml(t("lang_switch", lang))}</a>
+          <a href="/lang/${
+      lang === "zh" ? "en" : "zh"
+    }" class="btn btn-ghost btn-sm" style="border:none;color:var(--text-tertiary);">${ICONS.globe} ${
+      escapeHtml(t("lang_switch", lang))
+    }</a>
         </div>
       </div>
     </div>
-  `, lang);
+  `,
+    lang,
+  );
 }
 
 // --------------- Public Page ---------------
@@ -758,10 +985,18 @@ export function publicPage(data: PublicPageData): string {
   const { lang, isLoggedIn } = data;
 
   const headerRight = isLoggedIn
-    ? `<span class="badge badge-active" style="font-size:0.8125rem;">${escapeHtml(t("logged_in", lang))}</span>
-        <a href="/dashboard" class="btn btn-ghost btn-sm">${escapeHtml(t("go_dashboard", lang))}</a>
-        <a href="/logout" class="btn btn-ghost btn-sm">${escapeHtml(t("logout", lang))}</a>`
-    : `<a href="/dashboard" class="btn btn-ghost btn-sm">${escapeHtml(t("management_entry", lang))}</a>`;
+    ? `<span class="badge badge-active" style="font-size:0.8125rem;">${
+      escapeHtml(t("logged_in", lang))
+    }</span>
+        <a href="/dashboard" class="btn btn-ghost btn-sm">${
+      escapeHtml(t("go_dashboard", lang))
+    }</a>
+        <a href="/logout" class="btn btn-ghost btn-sm">${
+      escapeHtml(t("logout", lang))
+    }</a>`
+    : `<a href="/dashboard" class="btn btn-ghost btn-sm">${
+      escapeHtml(t("management_entry", lang))
+    }</a>`;
 
   const permanentOption = isLoggedIn
     ? `<option value="permanent">${escapeHtml(t("permanent", lang))}</option>`
@@ -769,23 +1004,34 @@ export function publicPage(data: PublicPageData): string {
 
   const customCodeField = isLoggedIn
     ? `<div>
-              <label style="display:block;font-size:0.8125rem;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">${escapeHtml(t("custom_code", lang))}</label>
-              <input type="text" id="createCode" placeholder="${escapeHtml(t("custom_code_placeholder", lang))}" style="width:100%;" />
+              <label style="display:block;font-size:0.8125rem;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">${
+      escapeHtml(t("custom_code", lang))
+    }</label>
+              <input type="text" id="createCode" placeholder="${
+      escapeHtml(t("custom_code_placeholder", lang))
+    }" style="width:100%;" />
             </div>`
     : "";
 
   const formEndpoint = isLoggedIn ? "/api/links" : "/api/public/links";
   const submitButtonText = escapeHtml(t("create_button", lang));
 
-  return layout(`
+  return layout(
+    `
     <div class="header">
       <div class="header-left">
         <span class="header-logo">${ICONS.link}</span>
         <span class="header-title">${escapeHtml(t("site_title", lang))}</span>
       </div>
       <div class="header-right">
-        <button class="btn-icon" onclick="toggleTheme()" title="${escapeHtml(t("dark_mode", lang))}"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
-        <a href="/lang/${lang === "zh" ? "en" : "zh"}" class="btn-icon" title="${escapeHtml(t("lang_switch", lang))}" style="text-decoration:none;">${ICONS.globe}</a>
+        <button class="btn-icon" onclick="toggleTheme()" title="${
+      escapeHtml(t("dark_mode", lang))
+    }"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
+        <a href="/lang/${
+      lang === "zh" ? "en" : "zh"
+    }" class="btn-icon" title="${
+      escapeHtml(t("lang_switch", lang))
+    }" style="text-decoration:none;">${ICONS.globe}</a>
         ${headerRight}
       </div>
     </div>
@@ -793,25 +1039,41 @@ export function publicPage(data: PublicPageData): string {
     <div class="container" style="max-width:640px;padding-top:120px;">
       <div style="text-align:center;margin-bottom:40px;">
         <div style="display:flex;justify-content:center;margin-bottom:16px;color:var(--primary);">${ICONS.link}</div>
-        <h1 style="font-size:1.75rem;font-weight:800;margin-bottom:8px;">${escapeHtml(t("public_title", lang))}</h1>
-        <p style="color:var(--text-secondary);font-size:0.9375rem;">${escapeHtml(t("public_subtitle", lang))}</p>
+        <h1 style="font-size:1.75rem;font-weight:800;margin-bottom:8px;">${
+      escapeHtml(t("public_title", lang))
+    }</h1>
+        <p style="color:var(--text-secondary);font-size:0.9375rem;">${
+      escapeHtml(t("public_subtitle", lang))
+    }</p>
       </div>
 
       <div class="card">
         <form id="createForm" onsubmit="return createLink(event);">
           <div style="display:flex;flex-direction:column;gap:16px;">
             <div>
-              <label style="display:block;font-size:0.8125rem;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">${escapeHtml(t("target_url", lang))}</label>
-              <input type="url" id="createUrl" placeholder="${escapeHtml(t("url_placeholder", lang))}" required style="width:100%;" />
+              <label style="display:block;font-size:0.8125rem;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">${
+      escapeHtml(t("target_url", lang))
+    }</label>
+              <input type="url" id="createUrl" placeholder="${
+      escapeHtml(t("url_placeholder", lang))
+    }" required style="width:100%;" />
             </div>
             ${customCodeField}
             <div>
-              <label style="display:block;font-size:0.8125rem;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">${escapeHtml(t("expiry_label", lang))}</label>
+              <label style="display:block;font-size:0.8125rem;font-weight:500;color:var(--text-secondary);margin-bottom:6px;">${
+      escapeHtml(t("expiry_label", lang))
+    }</label>
               <select id="createTtl" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:0.875rem;font-family:var(--font);color:var(--text);background:var(--surface);outline:none;transition:all var(--transition);cursor:pointer;">
                 <option value="1d">${escapeHtml(t("expiry_1d", lang))}</option>
-                <option value="7d" selected>${escapeHtml(t("expiry_7d", lang))}</option>
-                <option value="14d">${escapeHtml(t("expiry_14d", lang))}</option>
-                <option value="30d">${escapeHtml(t("expiry_30d", lang))}</option>
+                <option value="7d" selected>${
+      escapeHtml(t("expiry_7d", lang))
+    }</option>
+                <option value="14d">${
+      escapeHtml(t("expiry_14d", lang))
+    }</option>
+                <option value="30d">${
+      escapeHtml(t("expiry_30d", lang))
+    }</option>
                 ${permanentOption}
               </select>
             </div>
@@ -822,21 +1084,31 @@ export function publicPage(data: PublicPageData): string {
 
       <div id="resultArea" style="display:none;">
         <div class="card" style="border-color:var(--success);">
-          <h2 style="color:var(--success);margin-bottom:16px;">${escapeHtml(t("result_title", lang))}</h2>
+          <h2 style="color:var(--success);margin-bottom:16px;">${
+      escapeHtml(t("result_title", lang))
+    }</h2>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div>
-              <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${escapeHtml(t("short_url", lang))}</div>
+              <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${
+      escapeHtml(t("short_url", lang))
+    }</div>
               <div class="copy-text" style="width:100%;">
                 <span id="resultUrl" style="word-break:break-all;flex:1;"></span>
-                <button class="copy-btn" onclick="copyResult()">${ICONS.copy} ${escapeHtml(t("copy", lang))}</button>
+                <button class="copy-btn" onclick="copyResult()">${ICONS.copy} ${
+      escapeHtml(t("copy", lang))
+    }</button>
               </div>
             </div>
             <div>
-              <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${escapeHtml(t("target_url", lang))}</div>
+              <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${
+      escapeHtml(t("target_url", lang))
+    }</div>
               <div style="font-size:0.875rem;word-break:break-all;color:var(--text-secondary);" id="resultTarget"></div>
             </div>
             <div>
-              <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${escapeHtml(t("expires", lang))}</div>
+              <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${
+      escapeHtml(t("expires", lang))
+    }</div>
               <div style="font-size:0.875rem;" id="resultExpiry"></div>
             </div>
           </div>
@@ -920,7 +1192,9 @@ export function publicPage(data: PublicPageData): string {
       });
     }
     </script>
-  `, lang);
+  `,
+    lang,
+  );
 }
 
 // --------------- Dashboard Page ---------------
@@ -949,68 +1223,147 @@ export interface DashboardData {
     active: number;
     expired: number;
   };
+  realtimeClicks?: Record<string, number>;
+  topLinks?: Array<{ code: string; clicks: number; url: string }>;
+  timeSeries?: Array<{ date: string; count: number }>;
 }
 
 export function dashboardPage(data: DashboardData): string {
-  const { links, search, error, success, baseUrl, lang, stats } = data;
+  const {
+    links,
+    search,
+    error,
+    success,
+    baseUrl,
+    lang,
+    stats,
+    realtimeClicks,
+    topLinks,
+    timeSeries,
+  } = data;
 
   const rows = links.data.map((l) => {
-    const isExpired = l.expiresAt !== null && l.expiresAt < Date.now();
+    const isExpired = l.expiresAt !== null && l.expiresAt <= Date.now();
     const expiryLabel = l.expiresAt === null
       ? `<span class="badge badge-never">${escapeHtml(t("never", lang))}</span>`
       : isExpired
-      ? `<span class="badge badge-expired">${escapeHtml(t("expired", lang))}</span>`
-      : `<span class="badge badge-active">${new Date(l.expiresAt).toLocaleDateString()}</span>`;
+      ? `<span class="badge badge-expired">${
+        escapeHtml(t("expired", lang))
+      }</span>`
+      : `<span class="badge badge-active">${
+        new Date(l.expiresAt).toLocaleDateString()
+      }</span>`;
 
     const sourceLabel = l.source === "public"
-      ? `<span class="badge" style="background:var(--warning-light);color:var(--warning);">${escapeHtml(t("source_public", lang))}</span>`
-      : `<span class="badge" style="background:var(--primary-light);color:var(--primary);">${escapeHtml(t("source_admin", lang))}</span>`;
+      ? `<span class="badge" style="background:var(--warning-light);color:var(--warning);">${
+        escapeHtml(t("source_public", lang))
+      }</span>`
+      : `<span class="badge" style="background:var(--primary-light);color:var(--primary);">${
+        escapeHtml(t("source_admin", lang))
+      }</span>`;
+
+    const displayClicks = realtimeClicks && realtimeClicks[l.code] !== undefined
+      ? realtimeClicks[l.code]
+      : l.clicks;
 
     return `<tr>
-      <td><input type="checkbox" class="link-checkbox" value="${escapeHtml(l.code)}" onchange="updateBatchDelete()" /></td>
-      <td><a href="/dashboard/${l.code}" class="code-badge">${escapeHtml(l.code)}</a></td>
-      <td class="url-cell" title="${escapeHtml(l.url)}">${escapeHtml(l.url)}</td>
+      <td><input type="checkbox" class="link-checkbox" value="${
+      escapeHtml(l.code)
+    }" onchange="updateBatchDelete()" /></td>
+      <td><a href="/dashboard/${l.code}" class="code-badge">${
+      escapeHtml(l.code)
+    }</a></td>
+      <td class="url-cell" title="${escapeHtml(l.url)}">${
+      escapeHtml(l.url)
+    }</td>
       <td>${sourceLabel}</td>
-      <td class="clicks">${l.clicks.toLocaleString()}</td>
+      <td class="clicks">${displayClicks.toLocaleString()}</td>
       <td>${expiryLabel}</td>
       <td>${new Date(l.createdAt).toLocaleDateString()}</td>
       <td>
-        <button class="copy-btn" onclick="copyLink('${baseUrl}/${l.code}')">${ICONS.copy} ${escapeHtml(t("copy", lang))}</button>
+        <button class="copy-btn" onclick="copyLink('${baseUrl}/${l.code}')">${ICONS.copy} ${
+      escapeHtml(t("copy", lang))
+    }</button>
       </td>
     </tr>`;
   }).join("");
 
   const mobileCards = links.data.map((l) => {
-    const isExpired = l.expiresAt !== null && l.expiresAt < Date.now();
+    const isExpired = l.expiresAt !== null && l.expiresAt <= Date.now();
     const statusBadge = l.expiresAt === null
-      ? `<span class="badge badge-active">${escapeHtml(t("active", lang))}</span>`
+      ? `<span class="badge badge-active">${
+        escapeHtml(t("active", lang))
+      }</span>`
       : isExpired
-      ? `<span class="badge badge-expired">${escapeHtml(t("expired", lang))}</span>`
-      : `<span class="badge badge-active">${new Date(l.expiresAt).toLocaleDateString()}</span>`;
+      ? `<span class="badge badge-expired">${
+        escapeHtml(t("expired", lang))
+      }</span>`
+      : `<span class="badge badge-active">${
+        new Date(l.expiresAt).toLocaleDateString()
+      }</span>`;
 
     const sourceLabel = l.source === "public"
-      ? `<span class="badge" style="background:var(--warning-light);color:var(--warning);font-size:0.6875rem;">${escapeHtml(t("source_public", lang))}</span>`
-      : `<span class="badge" style="background:var(--primary-light);color:var(--primary);font-size:0.6875rem;">${escapeHtml(t("source_admin", lang))}</span>`;
+      ? `<span class="badge" style="background:var(--warning-light);color:var(--warning);font-size:0.6875rem;">${
+        escapeHtml(t("source_public", lang))
+      }</span>`
+      : `<span class="badge" style="background:var(--primary-light);color:var(--primary);font-size:0.6875rem;">${
+        escapeHtml(t("source_admin", lang))
+      }</span>`;
+
+    const displayClicks = realtimeClicks && realtimeClicks[l.code] !== undefined
+      ? realtimeClicks[l.code]
+      : l.clicks;
 
     return `<div class="mobile-link-card">
       <div class="m-card-row">
         <div style="display:flex;align-items:center;gap:8px;">
-          <input type="checkbox" class="link-checkbox" value="${escapeHtml(l.code)}" onchange="updateBatchDelete()" />
-          <a href="/dashboard/${l.code}" class="code-badge">${escapeHtml(l.code)}</a>
+          <input type="checkbox" class="link-checkbox" value="${
+      escapeHtml(l.code)
+    }" onchange="updateBatchDelete()" />
+          <a href="/dashboard/${l.code}" class="code-badge">${
+      escapeHtml(l.code)
+    }</a>
         </div>
         <div style="display:flex;gap:4px;">${sourceLabel} ${statusBadge}</div>
       </div>
       <div class="m-url" title="${escapeHtml(l.url)}">${escapeHtml(l.url)}</div>
       <div class="m-footer">
-        <span>${escapeHtml(t("clicks", lang))}: ${l.clicks.toLocaleString()}</span>
-        <button class="copy-btn" onclick="copyLink('${baseUrl}/${l.code}')">${ICONS.copy} ${escapeHtml(t("copy", lang))}</button>
+        <span>${
+      escapeHtml(t("clicks", lang))
+    }: ${displayClicks.toLocaleString()}</span>
+        <button class="copy-btn" onclick="copyLink('${baseUrl}/${l.code}')">${ICONS.copy} ${
+      escapeHtml(t("copy", lang))
+    }</button>
       </div>
     </div>`;
   }).join("");
 
   const totalPages = Math.max(1, Math.ceil(links.total / links.limit));
 
-  return layout(`
+  const topLinksHtml = topLinks && topLinks.length > 0
+    ? topLinks.map((item, i) => {
+      const truncUrl = item.url.length > 35
+        ? item.url.slice(0, 35) + "..."
+        : item.url;
+      return `<div class="top-link-item">
+          <span class="top-link-rank">${i + 1}</span>
+          <a href="/dashboard/${escapeHtml(item.code)}" class="top-link-code">${
+        escapeHtml(item.code)
+      }</a>
+          <span class="top-link-url" title="${escapeHtml(item.url)}">${
+        escapeHtml(truncUrl)
+      }</span>
+          <span class="top-link-clicks">${item.clicks.toLocaleString()}</span>
+        </div>`;
+    }).join("")
+    : `<div class="empty-state" style="padding:24px;">${
+      escapeHtml(t("no_data", lang))
+    }</div>`;
+
+  const tsJson = timeSeries ? JSON.stringify(timeSeries) : "[]";
+
+  return layout(
+    `
     <div class="header">
       <div class="header-left">
         <a href="/">
@@ -1019,50 +1372,110 @@ export function dashboardPage(data: DashboardData): string {
         </a>
       </div>
       <div class="header-right">
-        <button class="btn-icon" onclick="toggleTheme()" title="${escapeHtml(t("dark_mode", lang))}"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
-        <a href="/lang/${lang === "zh" ? "en" : "zh"}" class="btn-icon" title="${escapeHtml(t("lang_switch", lang))}" style="text-decoration:none;">${ICONS.globe}</a>
-        <a href="/logout" class="btn btn-ghost btn-sm">${escapeHtml(t("sign_out", lang))}</a>
+        <button class="btn-icon" onclick="toggleTheme()" title="${
+      escapeHtml(t("dark_mode", lang))
+    }"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
+        <a href="/lang/${
+      lang === "zh" ? "en" : "zh"
+    }" class="btn-icon" title="${
+      escapeHtml(t("lang_switch", lang))
+    }" style="text-decoration:none;">${ICONS.globe}</a>
+        <a href="/logout" class="btn btn-ghost btn-sm">${
+      escapeHtml(t("sign_out", lang))
+    }</a>
       </div>
     </div>
 
     <div class="container">
       ${error ? `<div class="msg msg-error">${escapeHtml(error)}</div>` : ""}
-      ${success ? `<div class="msg msg-success">${escapeHtml(success)}</div>` : ""}
+      ${
+      success ? `<div class="msg msg-success">${escapeHtml(success)}</div>` : ""
+    }
 
-      ${stats ? `
+      ${
+      stats
+        ? `
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;">
         <div class="card" style="margin-bottom:0;text-align:center;padding:20px 16px;">
-          <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${escapeHtml(t("total_links", lang))}</div>
+          <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${
+          escapeHtml(t("total_links", lang))
+        }</div>
           <div style="font-size:1.5rem;font-weight:700;font-family:var(--font-mono);color:var(--text);">${stats.total}</div>
         </div>
         <div class="card" style="margin-bottom:0;text-align:center;padding:20px 16px;">
-          <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${escapeHtml(t("active_links", lang))}</div>
+          <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${
+          escapeHtml(t("active_links", lang))
+        }</div>
           <div style="font-size:1.5rem;font-weight:700;font-family:var(--font-mono);color:var(--success);">${stats.active}</div>
         </div>
         <div class="card" style="margin-bottom:0;text-align:center;padding:20px 16px;">
-          <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${escapeHtml(t("expired_links", lang))}</div>
+          <div style="font-size:0.75rem;color:var(--text-secondary);margin-bottom:4px;">${
+          escapeHtml(t("expired_links", lang))
+        }</div>
           <div style="font-size:1.5rem;font-weight:700;font-family:var(--font-mono);color:var(--danger);">${stats.expired}</div>
         </div>
       </div>
-      ` : ""}
+      `
+        : ""
+    }
+
+      <div class="analytics-grid">
+        <div class="card" style="margin-bottom:0;">
+          <h2>${escapeHtml(t("click_trend", lang))}</h2>
+          <div class="chart-tabs">
+            <button class="chart-tab active" onclick="setChartDays(7, this)">${
+      escapeHtml(t("last_7_days", lang))
+    }</button>
+            <button class="chart-tab" onclick="setChartDays(30, this)">${
+      escapeHtml(t("last_30_days", lang))
+    }</button>
+          </div>
+          <div class="chart-container" id="chartContainer">
+            <div class="chart-tooltip" id="chartTooltip"></div>
+            <svg id="chartSvg" width="100%" height="200" style="overflow:visible;"></svg>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:0;">
+          <h2>${escapeHtml(t("top_links", lang))}</h2>
+          <div class="top-links-list">
+            ${topLinksHtml}
+          </div>
+        </div>
+      </div>
 
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
-          <h2 style="margin-bottom:0;">${escapeHtml(t("all_links", lang))} (${links.total})</h2>
+          <h2 style="margin-bottom:0;">${
+      escapeHtml(t("all_links", lang))
+    } (${links.total})</h2>
           <div style="display:flex;gap:8px;align-items:center;">
             <span id="selectedCount" style="font-size:0.8125rem;color:var(--text-secondary);display:none;"></span>
-            <button id="batchDeleteBtn" class="btn btn-danger btn-sm" style="display:none;" onclick="batchDelete()">${ICONS.trash} ${escapeHtml(t("batch_delete", lang))}</button>
+            <button id="batchDeleteBtn" class="btn btn-danger btn-sm" style="display:none;" onclick="batchDelete()">${ICONS.trash} ${
+      escapeHtml(t("batch_delete", lang))
+    }</button>
           </div>
         </div>
         <form method="GET" action="/dashboard" class="search-bar">
           <div class="search-input-wrapper">
             <span class="search-icon">${ICONS.search}</span>
-            <input type="text" name="search" placeholder="${escapeHtml(t("search_placeholder", lang))}" value="${escapeHtml(search)}" />
+            <input type="text" name="search" placeholder="${
+      escapeHtml(t("search_placeholder", lang))
+    }" value="${escapeHtml(search)}" />
           </div>
-          <button type="submit" class="btn btn-ghost">${escapeHtml(t("search", lang))}</button>
-          ${search ? `<a href="/dashboard" class="btn btn-ghost">${escapeHtml(t("clear", lang))}</a>` : ""}
+          <button type="submit" class="btn btn-ghost">${
+      escapeHtml(t("search", lang))
+    }</button>
+          ${
+      search
+        ? `<a href="/dashboard" class="btn btn-ghost">${
+          escapeHtml(t("clear", lang))
+        }</a>`
+        : ""
+    }
         </form>
-        ${links.data.length > 0 ? `
+        ${
+      links.data.length > 0
+        ? `
           <div class="table-wrapper">
             <table>
               <thead>
@@ -1082,24 +1495,149 @@ export function dashboardPage(data: DashboardData): string {
           </div>
           <div class="mobile-cards">${mobileCards}</div>
           <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border-light);">
-            <button id="batchDeleteBtnBottom" class="btn btn-danger btn-sm" style="display:none;" onclick="batchDelete()">${ICONS.trash} ${escapeHtml(t("batch_delete", lang))}</button>
+            <button id="batchDeleteBtnBottom" class="btn btn-danger btn-sm" style="display:none;" onclick="batchDelete()">${ICONS.trash} ${
+          escapeHtml(t("batch_delete", lang))
+        }</button>
           </div>
           <div class="pagination">
-            <span>${escapeHtml(t("page_info", lang).replace("{page}", String(links.page)).replace("{total}", String(totalPages)))}</span>
+            <span>${
+          escapeHtml(
+            t("page_info", lang).replace("{page}", String(links.page)).replace(
+              "{total}",
+              String(totalPages),
+            ),
+          )
+        }</span>
             <div style="display:flex;gap:8px;">
-              ${links.page > 1
-                ? `<a href="/dashboard?page=${links.page - 1}${search ? "&search=" + encodeURIComponent(search) : ""}" class="btn btn-ghost btn-sm">${ICONS.arrowLeft} ${escapeHtml(t("previous", lang))}</a>`
-                : ""}
-              ${links.page < totalPages
-                ? `<a href="/dashboard?page=${links.page + 1}${search ? "&search=" + encodeURIComponent(search) : ""}" class="btn btn-ghost btn-sm">${escapeHtml(t("next", lang))} ${ICONS.externalLink}</a>`
-                : ""}
+              ${
+          links.page > 1
+            ? `<a href="/dashboard?page=${links.page - 1}${
+              search ? "&search=" + encodeURIComponent(search) : ""
+            }" class="btn btn-ghost btn-sm">${ICONS.arrowLeft} ${
+              escapeHtml(t("previous", lang))
+            }</a>`
+            : ""
+        }
+              ${
+          links.page < totalPages
+            ? `<a href="/dashboard?page=${links.page + 1}${
+              search ? "&search=" + encodeURIComponent(search) : ""
+            }" class="btn btn-ghost btn-sm">${
+              escapeHtml(t("next", lang))
+            } ${ICONS.externalLink}</a>`
+            : ""
+        }
             </div>
           </div>
-        ` : `<div class="empty-state">${escapeHtml(t("no_links", lang))}</div>`}
+        `
+        : `<div class="empty-state">${escapeHtml(t("no_links", lang))}</div>`
+    }
       </div>
     </div>
 
     <script>
+    var _timeSeries = ${tsJson};
+    var _chartDays = 7;
+
+    function setChartDays(days, btn) {
+      _chartDays = days;
+      var tabs = document.querySelectorAll('.chart-tab');
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      btn.classList.add('active');
+      drawChart();
+    }
+
+    function drawChart() {
+      var svg = document.getElementById('chartSvg');
+      var tooltip = document.getElementById('chartTooltip');
+      var data = _timeSeries.slice(-_chartDays);
+      var w = svg.clientWidth || 400;
+      var h = 200;
+      var pad = { top: 10, right: 10, bottom: 30, left: 40 };
+      var chartW = w - pad.left - pad.right;
+      var chartH = h - pad.top - pad.bottom;
+
+      var maxVal = 0;
+      data.forEach(function(d) { if (d.count > maxVal) maxVal = d.count; });
+      if (maxVal === 0) maxVal = 1;
+
+      var points = data.map(function(d, i) {
+        var x = pad.left + (data.length > 1 ? (i / (data.length - 1)) * chartW : chartW / 2);
+        var y = pad.top + chartH - (d.count / maxVal) * chartH;
+        return { x: x, y: y, date: d.date, count: d.count };
+      });
+
+      var html = '';
+
+      // Grid lines
+      for (var g = 0; g <= 4; g++) {
+        var gy = pad.top + (g / 4) * chartH;
+        var gv = Math.round(maxVal * (1 - g / 4));
+        html += '<line x1="' + pad.left + '" y1="' + gy + '" x2="' + (w - pad.right) + '" y2="' + gy + '" stroke="var(--border-light)" stroke-width="1"/>';
+        html += '<text x="' + (pad.left - 6) + '" y="' + (gy + 4) + '" text-anchor="end" fill="var(--text-tertiary)" font-size="10" font-family="var(--font-mono)">' + gv + '</text>';
+      }
+
+      // X-axis labels
+      var labelStep = Math.max(1, Math.floor(data.length / 6));
+      points.forEach(function(p, i) {
+        if (i % labelStep === 0 || i === points.length - 1) {
+          var label = p.date.slice(5);
+          html += '<text x="' + p.x + '" y="' + (h - 6) + '" text-anchor="middle" fill="var(--text-tertiary)" font-size="10" font-family="var(--font-mono)">' + label + '</text>';
+        }
+      });
+
+      // Area fill
+      if (points.length > 1) {
+        var areaPath = 'M' + points[0].x + ',' + (pad.top + chartH);
+        points.forEach(function(p) { areaPath += ' L' + p.x + ',' + p.y; });
+        areaPath += ' L' + points[points.length - 1].x + ',' + (pad.top + chartH) + ' Z';
+        html += '<path d="' + areaPath + '" fill="var(--primary)" opacity="0.08"/>';
+      }
+
+      // Line
+      if (points.length > 1) {
+        var linePath = 'M' + points.map(function(p) { return p.x + ',' + p.y; }).join(' L');
+        html += '<path d="' + linePath + '" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
+      }
+
+      // Dots
+      points.forEach(function(p, i) {
+        html += '<circle cx="' + p.x + '" cy="' + p.y + '" r="3" fill="var(--primary)" stroke="var(--surface)" stroke-width="2" style="cursor:pointer" data-idx="' + i + '"/>';
+      });
+
+      svg.innerHTML = html;
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+
+      svg.onmousemove = function(e) {
+        var rect = svg.getBoundingClientRect();
+        var mx = e.clientX - rect.left;
+        var closest = null;
+        var minDist = Infinity;
+        points.forEach(function(p) {
+          var dist = Math.abs(p.x - mx);
+          if (dist < minDist) { minDist = dist; closest = p; }
+        });
+        if (closest && minDist < 30) {
+          tooltip.textContent = closest.date + ': ' + closest.count;
+          tooltip.style.left = closest.x + 'px';
+          tooltip.style.top = (closest.y - 28) + 'px';
+          tooltip.classList.add('visible');
+        } else {
+          tooltip.classList.remove('visible');
+        }
+      };
+      svg.onmouseleave = function() { tooltip.classList.remove('visible'); };
+    }
+
+    if (_timeSeries.length > 0) {
+      drawChart();
+      window.addEventListener('resize', drawChart);
+    } else {
+      document.getElementById('chartSvg').innerHTML = '<text x="50%" y="50%" text-anchor="middle" fill="var(--text-tertiary)" font-size="14">${
+      escapeHtml(t("no_data", lang))
+    }</text>';
+    }
+
     function copyLink(url) {
       navigator.clipboard.writeText(url).then(function() {
         showToast('${escapeHtml(t("copied", lang))}');
@@ -1120,7 +1658,9 @@ export function dashboardPage(data: DashboardData): string {
         btn.style.display = 'inline-flex';
         btnBottom.style.display = 'inline-flex';
         label.style.display = 'inline';
-        label.textContent = '${escapeHtml(t("links_selected", lang).replace("{count}", "' + count + '"))}';
+        label.textContent = '${
+      escapeHtml(t("links_selected", lang).replace("{count}", "' + count + '"))
+    }';
       } else {
         btn.style.display = 'none';
         btnBottom.style.display = 'none';
@@ -1148,7 +1688,9 @@ export function dashboardPage(data: DashboardData): string {
       form.submit();
     }
     </script>
-  `, lang);
+  `,
+    lang,
+  );
 }
 
 // --------------- Detail Page ---------------
@@ -1161,26 +1703,36 @@ export interface DetailData {
     createdAt: number;
     expiresAt: number | null;
     customCode: boolean;
-    active: boolean;
   };
   baseUrl: string;
   error?: string;
   success?: string;
   lang: Locale;
+  qrSvg?: string;
 }
 
 export function detailPage(data: DetailData): string {
-  const { link, baseUrl, error, success, lang } = data;
+  const { link, baseUrl, error, success, lang, qrSvg } = data;
   const shortUrl = `${baseUrl}/${link.code}`;
-  const isExpired = link.expiresAt !== null && link.expiresAt < Date.now();
+  const isExpired = link.expiresAt !== null && link.expiresAt <= Date.now();
 
   const statusHtml = isExpired
-    ? `<span class="badge badge-expired">${escapeHtml(t("expired", lang))}</span>`
-    : link.active
-    ? `<span class="badge badge-active">${escapeHtml(t("active", lang))}</span>`
-    : `<span class="badge badge-deleted">${escapeHtml(t("deleted", lang))}</span>`;
+    ? `<span class="badge badge-expired">${
+      escapeHtml(t("expired", lang))
+    }</span>`
+    : `<span class="badge badge-active">${
+      escapeHtml(t("active", lang))
+    }</span>`;
 
-  return layout(`
+  const qrHtml = qrSvg
+    ? `<div class="qr-section">
+        ${qrSvg}
+        <span class="qr-label">${escapeHtml(shortUrl)}</span>
+       </div>`
+    : "";
+
+  return layout(
+    `
     <div class="header">
       <div class="header-left">
         <a href="/">
@@ -1189,9 +1741,17 @@ export function detailPage(data: DetailData): string {
         </a>
       </div>
       <div class="header-right">
-        <button class="btn-icon" onclick="toggleTheme()" title="${escapeHtml(t("dark_mode", lang))}"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
-        <a href="/lang/${lang === "zh" ? "en" : "zh"}" class="btn-icon" title="${escapeHtml(t("lang_switch", lang))}" style="text-decoration:none;">${ICONS.globe}</a>
-        <a href="/logout" class="btn btn-ghost btn-sm">${escapeHtml(t("sign_out", lang))}</a>
+        <button class="btn-icon" onclick="toggleTheme()" title="${
+      escapeHtml(t("dark_mode", lang))
+    }"><span class="theme-sun">${ICONS.sun}</span><span class="theme-moon">${ICONS.moon}</span></button>
+        <a href="/lang/${
+      lang === "zh" ? "en" : "zh"
+    }" class="btn-icon" title="${
+      escapeHtml(t("lang_switch", lang))
+    }" style="text-decoration:none;">${ICONS.globe}</a>
+        <a href="/logout" class="btn btn-ghost btn-sm">${
+      escapeHtml(t("sign_out", lang))
+    }</a>
       </div>
     </div>
 
@@ -1203,7 +1763,9 @@ export function detailPage(data: DetailData): string {
       </div>
 
       ${error ? `<div class="msg msg-error">${escapeHtml(error)}</div>` : ""}
-      ${success ? `<div class="msg msg-success">${escapeHtml(success)}</div>` : ""}
+      ${
+      success ? `<div class="msg msg-success">${escapeHtml(success)}</div>` : ""
+    }
 
       <div class="card">
         <h2>${escapeHtml(t("link_details", lang))}</h2>
@@ -1213,14 +1775,20 @@ export function detailPage(data: DetailData): string {
           <span class="detail-value">
             <span class="copy-text">
               <span id="shortUrl">${escapeHtml(shortUrl)}</span>
-              <button class="copy-btn" onclick="copyUrl()">${ICONS.copy} ${escapeHtml(t("copy", lang))}</button>
+              <button class="copy-btn" onclick="copyUrl()">${ICONS.copy} ${
+      escapeHtml(t("copy", lang))
+    }</button>
             </span>
           </span>
         </div>
 
         <div class="detail-field">
           <span class="detail-label">${escapeHtml(t("target_url", lang))}</span>
-          <span class="detail-value"><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener">${escapeHtml(link.url)} ${ICONS.externalLink}</a></span>
+          <span class="detail-value"><a href="${
+      escapeHtml(link.url)
+    }" target="_blank" rel="noopener">${
+      escapeHtml(link.url)
+    } ${ICONS.externalLink}</a></span>
         </div>
 
         <div class="detail-field">
@@ -1229,8 +1797,12 @@ export function detailPage(data: DetailData): string {
         </div>
 
         <div class="detail-field">
-          <span class="detail-label">${escapeHtml(t("custom_code_label", lang))}</span>
-          <span class="detail-value">${link.customCode ? escapeHtml(t("yes", lang)) : escapeHtml(t("no", lang))}</span>
+          <span class="detail-label">${
+      escapeHtml(t("custom_code_label", lang))
+    }</span>
+          <span class="detail-value">${
+      link.customCode ? escapeHtml(t("yes", lang)) : escapeHtml(t("no", lang))
+    }</span>
         </div>
 
         <div class="detail-field">
@@ -1240,19 +1812,66 @@ export function detailPage(data: DetailData): string {
 
         <div class="detail-field">
           <span class="detail-label">${escapeHtml(t("created", lang))}</span>
-          <span class="detail-value">${new Date(link.createdAt).toLocaleString()}</span>
+          <span class="detail-value">${
+      new Date(link.createdAt).toLocaleString()
+    }</span>
         </div>
 
         <div class="detail-field">
           <span class="detail-label">${escapeHtml(t("expires", lang))}</span>
-          <span class="detail-value">${link.expiresAt === null ? escapeHtml(t("never", lang)) : new Date(link.expiresAt).toLocaleString()}</span>
+          <span class="detail-value">${
+      link.expiresAt === null
+        ? escapeHtml(t("never", lang))
+        : new Date(link.expiresAt).toLocaleString()
+    }</span>
+        </div>
+
+        ${qrHtml}
+
+        <div class="edit-form">
+          <h3>${ICONS.edit} ${escapeHtml(t("edit_link", lang))}</h3>
+          <form method="POST" action="/dashboard/${link.code}/update">
+            <div class="form-field">
+              <label>${escapeHtml(t("target_url", lang))}</label>
+              <input type="url" name="url" value="${
+      escapeHtml(link.url)
+    }" required />
+            </div>
+            <div class="form-field">
+              <label>${escapeHtml(t("ttl_label", lang))}</label>
+              <select name="ttl" style="width:100%;">
+                <option value="1d">${escapeHtml(t("expiry_1d", lang))}</option>
+                <option value="7d">${escapeHtml(t("expiry_7d", lang))}</option>
+                <option value="14d">${
+      escapeHtml(t("expiry_14d", lang))
+    }</option>
+                <option value="30d">${
+      escapeHtml(t("expiry_30d", lang))
+    }</option>
+                <option value="permanent">${
+      escapeHtml(t("permanent", lang))
+    }</option>
+              </select>
+            </div>
+            <div style="margin-top:12px;">
+              <button type="submit" class="btn btn-primary btn-sm">${ICONS.edit} ${
+      escapeHtml(t("save", lang))
+    }</button>
+            </div>
+          </form>
         </div>
 
         <div class="detail-actions">
-          <form method="POST" action="/dashboard/${link.code}/delete" onsubmit="return confirm('${escapeHtml(t("delete_confirm", lang))}');">
-            <button type="submit" class="btn btn-danger">${ICONS.trash} ${escapeHtml(t("delete_link", lang))}</button>
+          <form method="POST" action="/dashboard/${link.code}/delete" onsubmit="return confirm('${
+      escapeHtml(t("delete_confirm", lang))
+    }');">
+            <button type="submit" class="btn btn-danger">${ICONS.trash} ${
+      escapeHtml(t("delete_link", lang))
+    }</button>
           </form>
-          <a href="/dashboard" class="btn btn-ghost">${ICONS.arrowLeft} ${escapeHtml(t("back", lang))}</a>
+          <a href="/dashboard" class="btn btn-ghost">${ICONS.arrowLeft} ${
+      escapeHtml(t("back", lang))
+    }</a>
         </div>
       </div>
     </div>
@@ -1265,23 +1884,34 @@ export function detailPage(data: DetailData): string {
       });
     }
     </script>
-  `, lang);
+  `,
+    lang,
+  );
 }
 
 // --------------- 404 Page ---------------
 
 export function notFoundPage(lang: Locale = "zh"): string {
-  return layout(`
+  return layout(
+    `
     <div class="not-found-wrapper">
       <div class="not-found-card">
         <div class="not-found-code">404</div>
         <h2>${escapeHtml(t("not_found_title", lang))}</h2>
         <p>${escapeHtml(t("not_found_desc", lang))}</p>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-          <a href="/" class="btn btn-primary">${escapeHtml(t("go_home", lang))}</a>
-          <a href="/lang/${lang === "zh" ? "en" : "zh"}" class="btn btn-ghost btn-sm">${ICONS.globe} ${escapeHtml(t("lang_switch", lang))}</a>
+          <a href="/" class="btn btn-primary">${
+      escapeHtml(t("go_home", lang))
+    }</a>
+          <a href="/lang/${
+      lang === "zh" ? "en" : "zh"
+    }" class="btn btn-ghost btn-sm">${ICONS.globe} ${
+      escapeHtml(t("lang_switch", lang))
+    }</a>
         </div>
       </div>
     </div>
-  `, lang);
+  `,
+    lang,
+  );
 }
