@@ -7,6 +7,9 @@
     "dev": "deno run --allow-net --allow-read --allow-env --unstable-kv main.ts",
     "start": "deno run --allow-net --allow-read --allow-env --unstable-kv main.ts"
   },
+  "fmt": {
+    "exclude": ["README.md"]
+  },
   "compilerOptions": {
     "strict": true,
     "noImplicitAny": false,
