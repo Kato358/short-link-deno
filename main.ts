@@ -150,7 +150,7 @@ app.post("/api/links", authMiddleware, async (c) => {
     if (!isValidCode(code)) {
       return c.json({
         error:
-          "Invalid code format. Use 3-32 alphanumeric, dash or underscore characters.",
+          "Invalid code format. Use 2-32 alphanumeric, dash or underscore characters.",
       }, 400);
     }
     if (isReservedCode(code)) {
@@ -597,7 +597,7 @@ app.post("/dashboard/batch-delete", cookieAuthMiddleware, async (c) => {
 
 app.get("/qr/:code", async (c) => {
   const code = c.req.param("code")!;
-  if (!/^[a-zA-Z0-9_-]{3,32}$/.test(code)) {
+  if (!/^[a-zA-Z0-9_-]{2,32}$/.test(code)) {
     return c.text("Invalid code", 400);
   }
   const baseUrl = new URL(c.req.url).origin;

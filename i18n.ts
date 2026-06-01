@@ -67,9 +67,9 @@ const translations: Translations = {
   server_error: { zh: "服务器配置错误", en: "Server configuration error" },
   invalid_url: { zh: "网址格式无效", en: "Invalid URL format" },
   invalid_code: {
-    zh: "短码格式无效，请使用 3-32 个字母、数字、横线或下划线",
+    zh: "短码格式无效，请使用 2-32 个字母、数字、横线或下划线",
     en:
-      "Invalid code format. Use 3-32 alphanumeric, dash or underscore characters.",
+      "Invalid code format. Use 2-32 alphanumeric, dash or underscore characters.",
   },
   code_reserved: { zh: "该短码已保留", en: "Code is reserved" },
   code_exists: { zh: "该短码已存在", en: "Code already exists" },

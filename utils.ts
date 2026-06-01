@@ -17,7 +17,7 @@ export function isReservedCode(code: string): boolean {
 }
 
 export function isValidCode(code: string): boolean {
-  return /^[a-zA-Z0-9_-]{3,32}$/.test(code);
+  return /^[a-zA-Z0-9_-]{2,32}$/.test(code);
 }
 
 export function generateCode(length = 6): string {
