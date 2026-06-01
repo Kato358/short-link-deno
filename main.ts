@@ -69,7 +69,17 @@ app.post("/api/public/links", async (c) => {
   const rateLimitResult = await checkRateLimit(ip, 20, 60 * 60 * 1000);
 
   if (!rateLimitResult.allowed) {
-    return c.json({ error: "Rate limit exceeded" }, 429);
+    const retryAfter = Math.ceil(
+      (rateLimitResult.resetAt - Date.now()) / 1000,
+    );
+    return c.json({ error: "Rate limit exceeded" }, 429, {
+      "RateLimit-Limit": "20",
+      "RateLimit-Remaining": String(rateLimitResult.remaining),
+      "RateLimit-Reset": String(
+        Math.ceil(rateLimitResult.resetAt / 1000),
+      ),
+      "Retry-After": String(retryAfter),
+    });
   }
 
   const body = await c.req.json<{ url?: string; ttl?: string }>();
@@ -101,12 +111,22 @@ app.post("/api/public/links", async (c) => {
 
     const ok = await createLink(record);
     if (ok) {
-      return c.json({
-        code,
-        url: body.url,
-        shortUrl: `${baseUrl}/${code}`,
-        expiresAt,
-      }, 201);
+      return c.json(
+        {
+          code,
+          url: body.url,
+          shortUrl: `${baseUrl}/${code}`,
+          expiresAt,
+        },
+        201,
+        {
+          "RateLimit-Limit": "20",
+          "RateLimit-Remaining": String(rateLimitResult.remaining),
+          "RateLimit-Reset": String(
+            Math.ceil(rateLimitResult.resetAt / 1000),
+          ),
+        },
+      );
     }
   }
 
@@ -335,10 +355,19 @@ app.get("/dashboard", async (c) => {
 
   const page = Math.max(1, parseInt(c.req.query("page") || "1", 10));
   const search = c.req.query("search") || "";
+
+  // 排序参数验证，无效值回退默认
+  const sortParam = c.req.query("sort");
+  const sort = sortParam === "code" ? "code" : "createdAt";
+  const orderParam = c.req.query("order");
+  const order = orderParam === "asc" ? "asc" : "desc";
+
   const links = await listLinks({
     page,
     limit: 20,
     search: search || undefined,
+    sort,
+    order,
   });
   const baseUrl = new URL(c.req.url).origin;
 
@@ -384,6 +413,8 @@ app.get("/dashboard", async (c) => {
       realtimeClicks,
       topLinks: topLinksWithUrls,
       timeSeries: timeSeries30,
+      sort,
+      order,
     }),
   );
 });

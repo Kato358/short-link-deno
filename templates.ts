@@ -878,6 +878,9 @@ tbody tr:last-child td { border-bottom: none; }
   .pagination { flex-direction: column; gap: 8px; text-align: center; }
   .card { padding: 16px; }
 }
+
+.sort-active { color: var(--primary); font-weight: 600; }
+.sort-indicator { font-size: 0.75em; margin-left: 4px; }
 `;
 
 // --------------- Layout ---------------
@@ -1236,6 +1239,8 @@ export interface DashboardData {
   realtimeClicks?: Record<string, number>;
   topLinks?: Array<{ code: string; clicks: number; url: string }>;
   timeSeries?: Array<{ date: string; count: number }>;
+  sort?: string;
+  order?: string;
 }
 
 export function dashboardPage(data: DashboardData): string {
@@ -1250,7 +1255,31 @@ export function dashboardPage(data: DashboardData): string {
     realtimeClicks,
     topLinks,
     timeSeries,
+    sort: sortField,
+    order: sortOrder,
   } = data;
+
+  // 排序参数默认值
+  const currentSort = sortField ?? "createdAt";
+  const currentOrder = sortOrder ?? "desc";
+
+  // 构建排序链接 URL 的辅助函数
+  function sortUrl(field: string): string {
+    const nextOrder = currentSort === field && currentOrder === "desc"
+      ? "asc"
+      : "desc";
+    let url = `/dashboard?sort=${field}&order=${nextOrder}&page=1`;
+    if (search) url += "&search=" + encodeURIComponent(search);
+    return url;
+  }
+
+  // 构建分页链接（保留排序和搜索参数）
+  function pageUrl(page: number): string {
+    let url =
+      `/dashboard?page=${page}&sort=${currentSort}&order=${currentOrder}`;
+    if (search) url += "&search=" + encodeURIComponent(search);
+    return url;
+  }
 
   const rows = links.data.map((l) => {
     const isExpired = l.expiresAt !== null && l.expiresAt <= Date.now();
@@ -1466,6 +1495,10 @@ export function dashboardPage(data: DashboardData): string {
           </div>
         </div>
         <form method="GET" action="/dashboard" class="search-bar">
+          <input type="hidden" name="sort" value="${escapeHtml(currentSort)}" />
+          <input type="hidden" name="order" value="${
+      escapeHtml(currentOrder)
+    }" />
           <div class="search-input-wrapper">
             <span class="search-icon">${ICONS.search}</span>
             <input type="text" name="search" placeholder="${
@@ -1477,7 +1510,7 @@ export function dashboardPage(data: DashboardData): string {
     }</button>
           ${
       search
-        ? `<a href="/dashboard" class="btn btn-ghost">${
+        ? `<a href="/dashboard?sort=${currentSort}&order=${currentOrder}" class="btn btn-ghost">${
           escapeHtml(t("clear", lang))
         }</a>`
         : ""
@@ -1491,12 +1524,36 @@ export function dashboardPage(data: DashboardData): string {
               <thead>
                 <tr>
                   <th style="width:40px;"><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)" /></th>
-                  <th>${escapeHtml(t("code", lang))}</th>
+                  <th><a href="${sortUrl("code")}" title="${
+          escapeHtml(t("sort_by_code", lang))
+        }" class="${
+          currentSort === "code" ? "sort-active" : ""
+        }" style="text-decoration:none;color:inherit;">${
+          escapeHtml(t("code", lang))
+        }${
+          currentSort === "code"
+            ? `<span class="sort-indicator">${
+              currentOrder === "desc" ? "↓" : "↑"
+            }</span>`
+            : ""
+        }</a></th>
                   <th>${escapeHtml(t("url", lang))}</th>
                   <th>${escapeHtml(t("source", lang))}</th>
                   <th>${escapeHtml(t("clicks", lang))}</th>
                   <th>${escapeHtml(t("expires", lang))}</th>
-                  <th>${escapeHtml(t("created", lang))}</th>
+                  <th><a href="${sortUrl("createdAt")}" title="${
+          escapeHtml(t("sort_by_time", lang))
+        }" class="${
+          currentSort === "createdAt" ? "sort-active" : ""
+        }" style="text-decoration:none;color:inherit;">${
+          escapeHtml(t("created", lang))
+        }${
+          currentSort === "createdAt"
+            ? `<span class="sort-indicator">${
+              currentOrder === "desc" ? "↓" : "↑"
+            }</span>`
+            : ""
+        }</a></th>
                   <th></th>
                 </tr>
               </thead>
@@ -1521,8 +1578,8 @@ export function dashboardPage(data: DashboardData): string {
             <div style="display:flex;gap:8px;">
               ${
           links.page > 1
-            ? `<a href="/dashboard?page=${links.page - 1}${
-              search ? "&search=" + encodeURIComponent(search) : ""
+            ? `<a href="${
+              pageUrl(links.page - 1)
             }" class="btn btn-ghost btn-sm">${ICONS.arrowLeft} ${
               escapeHtml(t("previous", lang))
             }</a>`
@@ -1530,8 +1587,8 @@ export function dashboardPage(data: DashboardData): string {
         }
               ${
           links.page < totalPages
-            ? `<a href="/dashboard?page=${links.page + 1}${
-              search ? "&search=" + encodeURIComponent(search) : ""
+            ? `<a href="${
+              pageUrl(links.page + 1)
             }" class="btn btn-ghost btn-sm">${
               escapeHtml(t("next", lang))
             } ${ICONS.externalLink}</a>`

@@ -147,6 +147,9 @@ const translations: Translations = {
   // QR code
   qr_code: { zh: "二维码", en: "QR Code" },
   download_qr: { zh: "下载二维码", en: "Download QR" },
+  // 排序
+  sort_by_time: { zh: "按时间排序", en: "Sort by Time" },
+  sort_by_code: { zh: "按短码排序", en: "Sort by Code" },
 };
 
 export function t(key: string, lang: Locale = "zh"): string {

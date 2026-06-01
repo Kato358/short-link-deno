@@ -158,6 +158,8 @@ export interface ListOptions {
   page: number;
   limit: number;
   search?: string;
+  sort?: "createdAt" | "code";
+  order?: "asc" | "desc";
 }
 
 export interface ListResult {
@@ -189,7 +191,18 @@ export async function listLinks(options: ListOptions): Promise<ListResult> {
     allLinks.push(record);
   }
 
-  allLinks.sort((a, b) => b.createdAt - a.createdAt);
+  // 根据 sort 和 order 参数排序，默认按创建时间降序
+  const sortField = options.sort ?? "createdAt";
+  const sortOrder = options.order ?? "desc";
+  allLinks.sort((a, b) => {
+    let cmp: number;
+    if (sortField === "code") {
+      cmp = a.code.localeCompare(b.code);
+    } else {
+      cmp = a.createdAt - b.createdAt;
+    }
+    return sortOrder === "desc" ? -cmp : cmp;
+  });
 
   const total = allLinks.length;
   const start = (options.page - 1) * options.limit;
@@ -241,7 +254,7 @@ export async function checkRateLimit(
   ip: string,
   limit: number,
   windowMs: number,
-): Promise<{ allowed: boolean; remaining: number }> {
+): Promise<{ allowed: boolean; remaining: number; resetAt: number }> {
   const db = await getKv();
   const key = ["rate_limit", ip];
   const now = Date.now();
@@ -250,12 +263,17 @@ export async function checkRateLimit(
   const current = entry.value;
 
   if (!current || now - current.windowStart > windowMs) {
+    // 新窗口开始
     await db.set(key, { count: 1, windowStart: now } as RateLimitEntry);
-    return { allowed: true, remaining: limit - 1 };
+    return { allowed: true, remaining: limit - 1, resetAt: now + windowMs };
   }
 
   if (current.count >= limit) {
-    return { allowed: false, remaining: 0 };
+    return {
+      allowed: false,
+      remaining: 0,
+      resetAt: current.windowStart + windowMs,
+    };
   }
 
   const updated: RateLimitEntry = {
@@ -263,5 +281,9 @@ export async function checkRateLimit(
     windowStart: current.windowStart,
   };
   await db.set(key, updated);
-  return { allowed: true, remaining: limit - updated.count };
+  return {
+    allowed: true,
+    remaining: limit - updated.count,
+    resetAt: current.windowStart + windowMs,
+  };
 }
